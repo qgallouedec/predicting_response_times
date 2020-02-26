@@ -1,0 +1,192 @@
+----------------------------All neural network tested---------------------------
+--------------------------------------------------------------------------------
+
+(fc1): Linear(in_features=1325, out_features=128, bias=True)
+(dropout1): Dropout(p=0.2, inplace=False)
+(fc2): Linear(in_features=128, out_features=64, bias=True)
+(dropout2): Dropout(p=0.2, inplace=False)
+(fc3): Linear(in_features=64, out_features=32, bias=True)
+(dropout3): Dropout(p=0.2, inplace=False)
+(fc4): Linear(in_features=32, out_features=3, bias=True)
+
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.99)
+scheduler = StepLR(optimizer, step_size=200, gamma=0.1)
+criterion = nn.L1Loss()
+
+Best test loss : 84.7
+
+Comment : -
+
+--------------------------------------------------------------------------------
+
+(fc1): Linear(in_features=1325, out_features=1024, bias=True)
+(dropout1): Dropout(p=0.4, inplace=False)
+(fc2): Linear(in_features=1024, out_features=512, bias=True)
+(dropout2): Dropout(p=0.4, inplace=False)
+(fc3): Linear(in_features=512, out_features=256, bias=True)
+(dropout3): Dropout(p=0.4, inplace=False)
+(fc4): Linear(in_features=256, out_features=3, bias=True)
+
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.99)
+scheduler = StepLR(optimizer, step_size=200, gamma=0.1)
+criterion = nn.L1Loss()
+
+Best test loss : 90.84
+
+Comment : Modèle trop complexe, il overfitte à chaque fois, même avec un
+          droppout haut
+
+--------------------------------------------------------------------------------
+
+(fc1): Linear(in_features=1325, out_features=32, bias=True)
+(dropout1): Dropout(p=0.2, inplace=False)
+(fc2): Linear(in_features=32, out_features=8, bias=True)
+(dropout2): Dropout(p=0.2, inplace=False)
+(fc3): Linear(in_features=8, out_features=3, bias=True)
+
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.99)
+scheduler = StepLR(optimizer, step_size=200, gamma=0.1)
+criterion = nn.L1Loss()
+
+Best test loss : 84.83
+
+Comment : La train loss reste au dessus de la test loss. Cause ?
+          dropout + moède trop simple ?
+
+--------------------------------------------------------------------------------
+
+
+(fc1): Linear(in_features=1325, out_features=32, bias=True)
+(dropout1): Dropout(p=0.2, inplace=False)
+(fc2): Linear(in_features=32, out_features=32, bias=True)
+(dropout2): Dropout(p=0.2, inplace=False)
+(fc3): Linear(in_features=32, out_features=8, bias=True)
+(dropout3): Dropout(p=0.2, inplace=False)
+(fc4): Linear(in_features=8, out_features=3, bias=True)
+
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.99)
+scheduler = StepLR(optimizer, step_size=200, gamma=0.1)
+criterion = nn.L1Loss()
+
+Best test loss : 87.24
+
+Comment : L'ajout d'un couche cachée n'a pas rendu les résultats meilleurs.
+          Prochain essai avec des couches cahcées plus grande
+
+--------------------------------------------------------------------------------
+
+(fc1): Linear(in_features=1325, out_features=64, bias=True)
+(dropout1): Dropout(p=0.2, inplace=False)
+(fc2): Linear(in_features=64, out_features=64, bias=True)
+(dropout2): Dropout(p=0.2, inplace=False)
+(fc3): Linear(in_features=64, out_features=3, bias=True)
+
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.99)
+scheduler = StepLR(optimizer, step_size=200, gamma=0.1)
+criterion = nn.L1Loss()
+
+Best test loss : 84.31
+
+Comment : 2 couches cachées ça marche bien. Essayons avec une seule
+
+--------------------------------------------------------------------------------
+
+(fc1): Linear(in_features=1325, out_features=128, bias=True)
+(dropout1): Dropout(p=0.2, inplace=False)
+(fc2): Linear(in_features=128, out_features=3, bias=True)
+
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.99)
+scheduler = StepLR(optimizer, step_size=200, gamma=0.1)
+criterion = nn.L1Loss()
+
+Best test loss : 83.95
+
+Comment : 1 couche cachée marche encore mieux. On augmente sa taille
+
+--------------------------------------------------------------------------------
+
+(fc1): Linear(in_features=1325, out_features=256, bias=True)
+(dropout1): Dropout(p=0.2, inplace=False)
+(fc2): Linear(in_features=256, out_features=3, bias=True)
+
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.99)
+scheduler = StepLR(optimizer, step_size=200, gamma=0.1)
+criterion = nn.L1Loss()
+
+Best test loss : 85.47
+
+Comment : Les perf diminuent. Il faut diminuer la taille de la couche cachée
+
+--------------------------------------------------------------------------------
+
+
+(fc1): Linear(in_features=1325, out_features=64, bias=True)
+(dropout1): Dropout(p=0.2, inplace=False)
+(fc2): Linear(in_features=64, out_features=3, bias=True)
+
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.99)
+scheduler = StepLR(optimizer, step_size=200, gamma=0.1)
+criterion = nn.L1Loss()
+
+Best test loss : 82.97
+
+Comment : Les perfs augmentent, diminuons encore
+
+--------------------------------------------------------------------------------
+
+
+(fc1): Linear(in_features=1325, out_features=32, bias=True)
+(dropout1): Dropout(p=0.2, inplace=False)
+(fc2): Linear(in_features=32, out_features=3, bias=True)
+
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.99)
+scheduler = StepLR(optimizer, step_size=200, gamma=0.1)
+criterion = nn.L1Loss()
+
+Best test loss : 84.40
+
+Comment : Pas d'amélioration. Le learning rate est peut-être descendu trop vite
+          changement d'optimizer
+
+--------------------------------------------------------------------------------
+
+(fc1): Linear(in_features=1325, out_features=64, bias=True)
+(dropout1): Dropout(p=0.2, inplace=False)
+(fc2): Linear(in_features=64, out_features=3, bias=True)
+
+optimizer = optim.Adagrad(net.parameters())
+criterion = nn.L1Loss()
+
+Best test loss : 210.95
+
+Comment : Bizarre, converge très lentement
+
+--------------------------------------------------------------------------------
+
+(fc1): Linear(in_features=1325, out_features=64, bias=True)
+(dropout1): Dropout(p=0.2, inplace=False)
+(fc2): Linear(in_features=64, out_features=3, bias=True)
+
+optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.9)
+scheduler = StepLR(optimizer, step_size=250, gamma=0.1)
+criterion = nn.L1Loss()
+
+Best test loss : 83.15
+
+
+--------------------------------------------------------------------------------
+
+(fc1): Linear(in_features=1325, out_features=48, bias=True)
+(dropout1): Dropout(p=0.2, inplace=False)
+(fc2): Linear(in_features=48, out_features=3, bias=True)
+
+optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.9)
+scheduler = StepLR(optimizer, step_size=250, gamma=0.1)
+criterion = nn.L1Loss()
+
+Best test loss : 83.05
+
+3 layers fully connected, hidden dimension = 64; SGD : initial lr=10^-2, momentum 0.9, step size 50, gamma=0.1; L1Loss
+
+  
+
