@@ -1,6 +1,9 @@
 # coding:utf-8
 
-"""Challenge data : predicting Paris Brigade Fire Response"""
+"""Challenge data : predicting Paris Brigade Fire Response
+Running this file will read the data of data/*.pickle. It will train
+the model and save the reults on testset in submission.csv
+"""
 
 import torch  # basic tools
 
@@ -99,7 +102,7 @@ def loss_on_testset(net, validation_loader, criterion):
 class ResponseTimeDataset(Dataset):
     """Response Time dataset."""
 
-    def __init__(self, train, slice_idx=0, nb_slices=50):
+    def __init__(self, train, slice_idx=12, nb_slices=40):
         super(ResponseTimeDataset, self).__init__()
 
         # load the np arrays
@@ -177,9 +180,9 @@ class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
 
-        self.fc1 = nn.Linear(1964, 64)
-        self.dropout1 = nn.Dropout(p=0.2)
-        self.fc2 = nn.Linear(64, 3)
+        self.fc1 = nn.Linear(1964, 72)
+        self.dropout1 = nn.Dropout(p=0.03)
+        self.fc2 = nn.Linear(72, 3)
 
     def forward(self, x):
         # Fully connected layer
@@ -191,7 +194,7 @@ class Net(nn.Module):
 
 def train(net, train_loader, validation_loader, optimizer, scheduler, criterion):
     """ Train the model """
-    for epoch in range(150):  # loop over the dataset multiple times
+    for epoch in range(300):  # loop over the dataset multiple times
         logging.debug("starting epoch %d" % epoch)
         train_losses = []
 
@@ -280,7 +283,7 @@ if __name__ == '__main__':
     net.load_state_dict(torch.load(PATH))
 
     test_set = ResponseTimeDatasetTest()
-    test_loader = DataLoader(test_set, batch_size=1)
+    test_loader = DataLoader(test_set, batch_size=1, shuffle=False)
 
     with open('./data/submission.csv', 'w') as write_file:
         with open('./data/x_test.csv', 'r') as csvfile:

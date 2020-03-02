@@ -208,7 +208,7 @@ if __name__ == '__main__':
 
     list_categories = {key: list(val) for key, val in categories.items()}
 
-    # ------------------------------------------------------
+    # ----------------------------X--------------------------
 
     list_no_category = [
         # bollean
