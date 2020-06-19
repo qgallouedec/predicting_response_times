@@ -24,8 +24,8 @@ criterion = nn.L1Loss()
 
 La loss sur le set d'entrainement et sur le set de validation. ($L_1\approx 72\text{ secondes}$)
 
-![L1 loss](docs/loss.png)
+![L1 loss](docs/loss.jpg)
 
 La coeficient de détermination (R2 score) sur le set de validation ($R^2 \approx 0.38$).
 
-![R2 score](docs/score.png)
+![R2 score](docs/score.jpg)
